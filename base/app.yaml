@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rest-api-cbr
+  labels:
+    rest-api-cbr: rest-api-cbr
+
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      rest-api-cbr: rest-api-cbr
+  template:
+    metadata:
+      labels:
+        rest-api-cbr: rest-api-cbr
+    spec:
+      containers:
+      - name: rest-api-cbr
+        image: gberdyshev/rest-api-cbr:1.0.1
+        ports:
+          - containerPort: 8000
+        resources:
+          requests:
+            cpu: 0.5
+          limits:
+            memory: 256Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    rest-api-cbr: rest-api-cbr
+  name: rest-api-cbr
+spec:
+  ports:
+  - port: 8000
+    protocol: TCP
+    targetPort: 8000
+  selector:
+    rest-api-cbr: rest-api-cbr
+  type: NodePort
