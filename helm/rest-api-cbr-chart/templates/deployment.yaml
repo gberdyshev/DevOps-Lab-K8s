@@ -8,7 +8,7 @@ spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      {{ include "rest-api-cbr-chart.name" . }}
+      app: {{ include "rest-api-cbr-chart.name" . }}
   template:
     metadata:
       labels:

@@ -12,4 +12,4 @@ spec:
       protocol: TCP
       name: http
   selector:
-    {{ include "rest-api-cbr-chart.name" . }}
+    app: {{ include "rest-api-cbr-chart.name" . }}
